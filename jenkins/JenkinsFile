@@ -20,8 +20,14 @@ pipeline {
                         mkdir -p "$GOCACHE" "$GOMODCACHE"
                         
                         # Run the tests
-                        go test -v ./...
+                        go test -v ./... 2>&1 | go-unit-report > report.xml
                     '''
+               }
+
+               post {
+                always {
+                    junit 'bugtracker-backend/report.xml'
+                }
                }
             }
         }
