@@ -35,7 +35,10 @@ pipeline {
         
             steps {
                 dir('bugtracker-frontend'){
-                    sh 'npm test'
+                    sh '''
+                        npm ci
+                        npm test
+                    '''
                 }
             }
         }
