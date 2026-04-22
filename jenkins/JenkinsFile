@@ -31,10 +31,11 @@ pipeline {
                     image 'node:20-alpine'
                 }
             }
-        }
-        steps {
-            dir('bugtracker-frontend'){
-                sh 'npm test'
+        
+            steps {
+                dir('bugtracker-frontend'){
+                    sh 'npm test'
+                }
             }
         }
     }
