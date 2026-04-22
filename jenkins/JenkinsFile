@@ -23,12 +23,11 @@ pipeline {
                         go test -v ./... 2>&1 | go-junit-report > test-result.xml
                     '''
                }
-
-               post {
-                always {
-                    junit 'bugtracker-backend/test-result.xml'
+            }
+        post {
+            always {
+                junit 'bugtracker-backend/test-result.xml'
                 }
-               }
             }
         }
         stage ('Unit Tests - Frontend'){
