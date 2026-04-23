@@ -36,7 +36,7 @@ pipeline {
             always {
                 junit 'bugtracker-backend/test-result.xml'
                 publishHTML target [
-                    reportDir: 'bugtracker-backend/reports'
+                    reportDir: 'bugtracker-backend/reports',
                     reportFiles: 'coverage.html',
                     reportName: 'Backend Coverage Report'
                 ]
