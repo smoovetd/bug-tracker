@@ -160,11 +160,12 @@ describe("BugList", () => {
         const titleInput = screen.getByDisplayValue("Bug 1");
         await userEvent.clear(titleInput);
         await userEvent.type(titleInput, "Updated Bug");
-        const saveButton = screen.getByRole("button", {
-          name: /save changes/i,
         });
-        fireEvent.click(saveButton);
-      });
+
+        const saveButton = screen.getByRole("button", { name: /save changes/i,});
+       await act(async () => {
+          fireEvent.click(saveButton);
+        });
 
       expect(updateBug).toHaveBeenCalledWith(
         "1",
