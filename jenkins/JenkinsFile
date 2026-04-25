@@ -71,7 +71,7 @@ pipeline {
                             reportDir: 'bugtracker-frontend/reports/coverage',
                             reportFiles: 'index.html',
                             reportName: 'Frontend Coverage Report'
-                        ]
+                            ]
                         }
                     }
                 }
@@ -105,6 +105,17 @@ pipeline {
                     sh 'npx wait-port http://localhost:8080/api/health -t 30000'
                     sh 'npm ci'
                     sh 'npx playwright test'
+                }
+            }
+
+            post {
+                always {
+                    junit 'test-api/test-results/results.xml'
+                    publishHTML target: [
+                    reportDir: 'test-api/playwright-report',
+                    reportFiles: 'index.html',
+                    reportName: 'API Testing Coverage Report'
+                    ]
                 }
             }
 
