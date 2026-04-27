@@ -1,6 +1,5 @@
 name: CI
 
-\\ to work only in main branch. workflow_dispatch is directly to run it
 on: 
   push:
     branches:
