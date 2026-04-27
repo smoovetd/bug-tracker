@@ -3,14 +3,14 @@ name: CI
 on: 
   push:
     branches:
-      main: 
-  workflow_dispatch: 
+      - main 
+  workflow_dispatch:
 
 jobs:
   unit-tests-backend:
     runs-on: ubuntu-latest
     steps: 
-      - uses: actions/checkout@v4 // checkout source code - in Jenkins is automatic
+      - uses: actions/checkout@v4
 
       - name: Set up go
         uses: actions/setup-go@v4
