@@ -42,7 +42,7 @@ jobs:
           npm ci 
           npm test 
 
-      - name: Publish Frontend Test Results
+      - name: Publish Frontend Unit Test Results
         uses: dorny/test-reporter@v1
         if: always()
         with: 
