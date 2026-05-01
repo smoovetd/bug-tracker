@@ -57,7 +57,7 @@ jobs:
   unit-tests-frontend:
     runs-on: ubuntu-latest
     outputs: 
-      coverages: ${{ steps.test-frontend.outputs.report}} 
+      coverage: ${{ steps.test-frontend.outputs.report}} 
     steps: 
       - uses: actions/checkout@v4
 
