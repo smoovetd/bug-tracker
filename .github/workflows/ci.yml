@@ -4,11 +4,16 @@ on:
   push:
     branches:
       - main 
+  pull_request:
+    branches:
+      - main
   workflow_dispatch:
 
 jobs:
   unit-tests-backend:
     runs-on: ubuntu-latest
+    outputs: 
+      coverage: ${{ steps.test-backend.outputs.report }}
     steps: 
       - uses: actions/checkout@v4
 
@@ -22,6 +27,7 @@ jobs:
         run: go install github.com/jstemmer/go-junit-report/v2@latest
 
       - name: Execute Backend Unit tests
+        id: test-backend
         working-directory: ./bugtracker-backend
         run: | 
 
@@ -32,6 +38,10 @@ jobs:
           echo '```' >> $GITHUB_STEP_SUMMARY
           cat coverage.txt >> $GITHUB_STEP_SUMMARY
           echo '```' >> $GITHUB_STEP_SUMMARY
+
+          echo "report<<E0F" >> $GITHUB_OUTPUT
+          cat coverage.txt >> $GITHUB_OUTPUT
+          echo "E0F" >> $GITHUB_OUTPUT
 
           go test -v ./... 2>&1 | go-junit-report > test-results.xml
 
@@ -45,7 +55,6 @@ jobs:
 
 
   unit-tests-frontend:
-    needs: unit-tests-backend
     runs-on: ubuntu-latest 
     steps: 
       - uses: actions/checkout@v4
@@ -90,5 +99,5 @@ jobs:
           body: |
             ## Backend Test Coverage Report 
             ```
-            ${{ needs.unit-tests-backend.output.coverage}}
+            ${{ needs.unit-tests-backend.output.coverage }}
             ```
