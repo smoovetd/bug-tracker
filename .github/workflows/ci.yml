@@ -125,7 +125,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4 
 
-      - name: Launch Application:
+      - name: Launch Application
         run: |
           docker compose up --build -d
           npx waut-port http://localhost:8080/api/health -t 30000
