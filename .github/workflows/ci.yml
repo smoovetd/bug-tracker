@@ -134,4 +134,4 @@ jobs:
         working-directory: ./tests-api
         run: |
           npm ci 
-          npm playwright test
+          npx playwright test
