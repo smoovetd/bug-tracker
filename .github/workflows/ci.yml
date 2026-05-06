@@ -117,7 +117,7 @@ jobs:
             ```
             ${{ needs.unit-tests-frontend.outputs.coverage }}
 
-  api-tests:
+  api-e2e-tests:
     needs: [unit-tests-backend, unit-tests-frontend]
     runs-on: ubuntu-latest 
 
@@ -135,6 +135,8 @@ jobs:
         run: |
           npm ci 
           npx playwright test
+
+
 
       - name: Shut Down Application 
         run: docker compose down 
@@ -177,11 +179,14 @@ jobs:
           docker compose up --build -d 
           npx wait-port http://localhost:8080/api/health -t 30000
 
+
       - name: Run E2E Tests
-        working-directory: ./tests-2e2
+        working-directory: ./tests-e2e
+        env: 
+          CI: "1"
         run: |
           npm ci 
-          npx playwrith test
+          npx playwrith test     
 
       - name: Shutdown Application
         run: docker-compose down 
