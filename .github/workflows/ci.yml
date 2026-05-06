@@ -179,7 +179,7 @@ jobs:
 
       - name: Run E2E Tests
         working-directory: ./tests-2e2
-        run |
+        run: |
           npm ci 
           npx playwrith test
 
